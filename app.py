@@ -50,37 +50,144 @@ st.set_page_config(
 # Custom Styling
 st.markdown("""
 <style>
-    .main-header {
+    /* 1. Hide Streamlit Branding & Deploy Button */
+    .stAppDeployButton, 
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"],
+    #MainMenu, 
+    footer {
+        display: none !important;
+        visibility: hidden !important;
+    }
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+        height: 0px !important;
+    }
+
+    /* 2. Global Typography & Spacing */
+    html, body, [class*="css"] {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .block-container {
+        padding-top: 1.6rem !important;
+        padding-bottom: 2rem !important;
+        max-width: 95% !important;
+    }
+
+    /* 3. Hero Header Banner */
+    .hero-header {
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.04) 100%);
+        border: 1px solid rgba(16, 185, 129, 0.22);
+        border-radius: 16px;
+        padding: 22px 26px 18px 26px;
+        margin-bottom: 22px;
+        backdrop-filter: blur(12px);
+    }
+    .main-title {
         font-size: 2.2rem;
         font-weight: 800;
-        color: #1b5e20;
-        margin-bottom: 0.2rem;
+        background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #6ee7b7 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+        line-height: 1.2;
     }
-    .sub-header {
-        font-size: 1.05rem;
-        color: #455a64;
-        margin-bottom: 1.5rem;
+    .hero-subtitle {
+        font-size: 0.95rem;
+        color: #94a3b8;
+        margin-bottom: 12px;
+        font-weight: 400;
     }
-    .metric-card {
-        background-color: #f1f8e9;
-        border-radius: 10px;
-        padding: 15px;
-        border-left: 5px solid #4caf50;
-        margin-bottom: 10px;
+    .badge-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 6px;
     }
-    .badge-module {
-        background-color: #e8f5e9;
-        color: #2e7d32;
-        padding: 4px 10px;
-        border-radius: 15px;
-        font-size: 0.82rem;
+    .badge-pill {
+        background: rgba(16, 185, 129, 0.12);
+        color: #34d399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.78rem;
         font-weight: 600;
-        display: inline-block;
-        margin-right: 5px;
-        margin-bottom: 5px;
+        letter-spacing: 0.2px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
     }
-    .stAlert {
-        border-radius: 8px;
+
+    /* 4. Tab Styling */
+    button[data-baseweb="tab"] {
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        padding: 10px 18px !important;
+        border-radius: 8px 8px 0 0 !important;
+        transition: all 0.2s ease-in-out !important;
+    }
+    button[data-baseweb="tab"][aria-selected="true"] {
+        border-bottom: 3px solid #10b981 !important;
+        color: #34d399 !important;
+    }
+
+    /* 5. Stage Visual Columns */
+    div[data-testid="column"] {
+        background: rgba(30, 41, 59, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        padding: 12px 14px;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    div[data-testid="column"]:hover {
+        border-color: rgba(16, 185, 129, 0.35);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    /* 6. Metric Cards */
+    [data-testid="stMetric"] {
+        background: rgba(15, 23, 42, 0.45) !important;
+        border: 1px solid rgba(16, 185, 129, 0.2) !important;
+        border-radius: 10px !important;
+        padding: 14px 18px !important;
+    }
+    [data-testid="stMetricValue"] {
+        font-size: 1.65rem !important;
+        font-weight: 700 !important;
+        color: #f8fafc !important;
+    }
+    [data-testid="stMetricLabel"] {
+        font-size: 0.88rem !important;
+        color: #94a3b8 !important;
+        font-weight: 500 !important;
+    }
+
+    /* 7. Action Buttons */
+    .stButton>button {
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        transition: all 0.2s ease !important;
+        background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 8px 20px !important;
+    }
+    .stButton>button:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35) !important;
+    }
+    .stDownloadButton>button {
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        padding: 8px 20px !important;
+    }
+    .stDownloadButton>button:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -100,18 +207,22 @@ def colorize_channel(channel_2d: np.ndarray, colormap_name: str = "viridis") -> 
 
 
 def main():
-    # Header Banner
-    st.markdown('<div class="main-header">🌿 Automated Plant Leaf Disease Detection & Severity Estimation</div>', unsafe_allow_html=True)
-    st.markdown(
-        '<div class="sub-header">'
-        '<span class="badge-module">Module 1-2: Filtering & CLAHE</span>'
-        '<span class="badge-module">Module 3: Otsu & K-Means Segmentation</span>'
-        '<span class="badge-module">Module 3 Twist: Severity % Calculation</span>'
-        '<span class="badge-module">Module 4-5: MobileNetV2 Deep Learning</span>'
-        '<span class="badge-module">Agronomic Advisory</span>'
-        '</div>',
-        unsafe_allow_html=True
-    )
+    # Hero Header Banner
+    st.markdown("""
+    <div class="hero-header">
+        <div class="main-title">🌿 Automated Plant Leaf Disease Detection & Severity Estimation</div>
+        <div class="hero-subtitle">
+            Diagnostic Computer Vision (Modules 1–3) & Deep Learning Transfer Pipeline (Modules 4–5) with Agronomic Advisory
+        </div>
+        <div class="badge-container">
+            <span class="badge-pill">⚙️ M1-2: Gaussian & LAB-CLAHE</span>
+            <span class="badge-pill">✂️ M3: Otsu & Morphological Masking</span>
+            <span class="badge-pill">🎯 M3 Twist: Quantitative Severity % Calculation</span>
+            <span class="badge-pill">🧠 M4-5: MobileNetV2 Classification</span>
+            <span class="badge-pill">💊 Agronomic Cure Advisory</span>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     classifier = get_classifier()
 
