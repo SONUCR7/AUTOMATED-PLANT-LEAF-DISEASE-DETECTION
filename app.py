@@ -306,11 +306,10 @@ def main():
         remedy = get_disease_remedy(classification["predicted_class"], severity_metrics)
 
     # Main Tabs
-    tab1, tab2, tab3, tab4 = st.tabs([
+    tab1, tab2, tab3 = st.tabs([
         "📊 5-Stage Diagnostic Pipeline",
         "🔬 CVIP Algorithm Inspector",
-        "📁 Batch Evaluation & CSV Export",
-        "🎓 Viva Voce & Theory Guide"
+        "📁 Batch Evaluation & CSV Export"
     ])
 
     # --------------------------------------------------------------------------
@@ -397,7 +396,7 @@ def main():
 
         # Download Report Section
         st.markdown("---")
-        st.subheader("📥 Export Diagnostic Report for Viva / Project File")
+        st.subheader("📥 Export Diagnostic Report (PNG)")
         
         fig = generate_5stage_figure(
             image_rgb, enhanced, leaf_mask, disease_overlay,
@@ -527,64 +526,6 @@ def main():
                 file_name="plant_leaf_disease_batch_evaluation.csv",
                 mime="text/csv"
             )
-
-    # --------------------------------------------------------------------------
-    # TAB 4: VIVA VOCE & THEORY GUIDE
-    # --------------------------------------------------------------------------
-    with tab4:
-        st.subheader("🎓 Viva Voce & Examiner Q&A Guide")
-        st.markdown("Ready-to-present technical explanations and mathematical derivations for your project viva!")
-
-        with st.expander("❓ Q1: Why use CLAHE instead of standard Global Histogram Equalization?", expanded=True):
-            st.markdown("""
-            **Answer:**
-            Global Histogram Equalization operates on the entire image intensity distribution at once. In leaf images where the background is dark/neutral and the leaf is bright green, global equalization over-amplifies background noise, blows out specular highlights on the leaf surface, and causes artificial color distortion.
-            
-            **CLAHE (Contrast Limited Adaptive Histogram Equalization)** solves this by:
-            1. Partitioning the image into contextual local grid tiles (e.g. $8 \\times 8$).
-            2. Computing local histograms for each tile.
-            3. **Contrast Limiting**: Clipping the histogram at a predefined clip limit (e.g. 2.5) and redistributing the clipped pixels uniformly across all bins to prevent local noise amplification.
-            4. Applying bilinear interpolation across tile boundaries to eliminate blocking artifacts.
-            5. Operating solely on the **Luminance ($L^*$) channel** in CIE-$L^*a^*b^*$ color space, preserving chromaticity without color shifts.
-            """)
-
-        with st.expander("❓ Q2: What is the mathematical formula for Disease Severity Estimation?"):
-            st.markdown(r"""
-            **Answer:**
-            Disease severity is computed using the ratio of diseased pixel area to total leaf area:
-            
-            $$\text{Severity Percentage } (S) = \left( \frac{N_{\text{diseased}}}{N_{\text{total\_leaf}}} \right) \times 100\%$$
-            
-            Where:
-            - $N_{\text{total\_leaf}} = \sum_{x,y} \mathbb{I}(\text{LeafMask}(x,y) > 0)$
-            - $N_{\text{diseased}} = \sum_{x,y} \mathbb{I}(\text{DiseaseMask}(x,y) > 0 \land \text{LeafMask}(x,y) > 0)$
-            
-            We map $S$ to standard FAO / Horsfall-Barratt pathological grading:
-            - **Grade 0 (Healthy):** $S < 0.5\%$
-            - **Grade 1 (Mild / Early):** $0.5\% \le S \le 10\%$
-            - **Grade 2 (Moderate):** $10\% < S \le 25\%$
-            - **Grade 3 (Severe):** $25\% < S \le 50\%$
-            - **Grade 4 (Critical):** $S > 50\%$
-            """)
-
-        with st.expander("❓ Q3: Why is HSV or L*a*b* color space superior to RGB for plant leaf segmentation?"):
-            st.markdown("""
-            **Answer:**
-            In the standard RGB color space, **luminance (illumination/brightness) and chrominance (color information) are deeply coupled** across all three channels ($R$, $G$, and $B$). A change in environmental lighting or shadows alters all three values simultaneously, causing Euclidean distance thresholds to fail.
-            
-            In **HSV** and **CIE-L*a*b***:
-            - Color information is completely decoupled from illumination:
-              - In HSV: **Hue ($H$)** represents pure chromatic pigment (chlorophyll green vs necrotic brown/yellow), completely invariant to shading.
-              - In LAB: **$a^*$** measures green-to-red axis, making it ideal for clustering necrotic spots independently of surface reflections.
-            """)
-
-        with st.expander("❓ Q4: Why MobileNetV2 instead of heavier architectures like VGG16 or ResNet50?"):
-            st.markdown(r"""
-            **Answer:**
-            1. **Inverted Residuals & Linear Bottlenecks**: MobileNetV2 employs depthwise separable convolutions that dramatically reduce parameters ($\sim 3.4\text{M}$ params for MobileNetV2 vs $\sim 138\text{M}$ for VGG16).
-            2. **Computational Efficiency**: Requires only $\sim 300\text{M}$ FLOPs, enabling real-time inference on edge agricultural hardware (Raspberry Pi, smartphones, drones in fields).
-            3. **High Accuracy**: Pre-trained on ImageNet and fine-tuned on PlantVillage, MobileNetV2 achieves $>96\%$ test accuracy while maintaining an inference latency under $25\text{ms}$.
-            """)
 
 
 if __name__ == "__main__":
