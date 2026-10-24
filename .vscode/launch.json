@@ -1,0 +1,42 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Streamlit: Run Plant Disease App",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "${workspaceFolder}/app.py"
+            ],
+            "jinja": true,
+            "justMyCode": true
+        },
+        {
+            "name": "Python: Run Pipeline on Sample Leaf",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/run_pipeline.py",
+            "args": [
+                "--image",
+                "${workspaceFolder}/dataset/samples/potato_early_blight.jpg",
+                "--output",
+                "${workspaceFolder}/results"
+            ],
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python: Run Batch Pipeline (All Samples)",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/run_pipeline.py",
+            "args": [
+                "--all-samples",
+                "--output",
+                "${workspaceFolder}/results"
+            ],
+            "console": "integratedTerminal"
+        }
+    ]
+}

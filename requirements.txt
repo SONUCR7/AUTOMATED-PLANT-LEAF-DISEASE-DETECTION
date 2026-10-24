@@ -1,0 +1,22 @@
+# Core Computer Vision & Image Processing
+opencv-python>=4.8.0
+numpy>=1.24.0
+scipy>=1.10.0
+scikit-image>=0.21.0
+scikit-learn>=1.3.0
+pillow>=10.0.0
+
+# Deep Learning (TensorFlow & PyTorch)
+tensorflow>=2.15.0
+# torch>=2.0.0 # (Optional, supported in anaconda)
+
+# Data Science & Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+pandas>=2.0.0
+
+# Interactive Dashboard UI
+streamlit>=1.30.0
+
+# Dataset Utilities
+kagglehub>=0.2.0

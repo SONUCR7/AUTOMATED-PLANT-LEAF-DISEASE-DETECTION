@@ -1,0 +1,62 @@
+{
+    "image_filename": "tomato_healthy.jpg",
+    "severity_analysis": {
+        "total_leaf_pixels": 77145,
+        "diseased_pixels": 1885,
+        "healthy_pixels": 75260,
+        "severity_percentage": 2.44,
+        "grade": "Grade 1",
+        "stage": "Mild / Early Infection",
+        "urgency": "Monitor & Preventive Action",
+        "color_code": [
+            241,
+            196,
+            15
+        ]
+    },
+    "classification": {
+        "predicted_class": "Tomato___Bacterial_spot",
+        "formatted_name": "Tomato - Bacterial spot",
+        "confidence": 83.33,
+        "top_predictions": [
+            {
+                "class_name": "Tomato___Bacterial_spot",
+                "formatted_name": "Tomato - Bacterial spot",
+                "confidence": 83.33
+            },
+            {
+                "class_name": "Tomato___healthy",
+                "formatted_name": "Tomato - healthy",
+                "confidence": 1.85
+            },
+            {
+                "class_name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+                "formatted_name": "Tomato - Tomato Yellow Leaf Curl Virus",
+                "confidence": 1.85
+            }
+        ]
+    },
+    "agronomic_advisory": {
+        "crop": "Tomato",
+        "disease_name": "Bacterial Spot",
+        "pathogen": "Xanthomonas perforans / euvesicatoria (Bacteria)",
+        "symptoms": "Small, dark brown to black circular lesions (1-3mm), often with greasy or water-soaked borders and conspicuous yellow chlorotic halos.",
+        "action_plan": "Prune spotted leaves with sanitized shears. Avoid handling plants when wet. Apply fixed copper bactericide.",
+        "organic_remedies": [
+            "Copper Hydroxide 53.8% DF (Kocide) @ 1.5 - 2.0 g/L",
+            "Bacillus amyloliquefaciens foliar spray",
+            "Hydrogen dioxide / peroxyacetic acid sanitation spray"
+        ],
+        "chemical_remedies": [
+            "Copper Oxychloride (50% WP) 2.5 g/L + Mancozeb 2.0 g/L",
+            "Kasugamycin 3% SL @ 1.5 - 2.0 ml/L",
+            "Streptomycin Sulfate 9% + Tetracycline 1% SP (Agrimycin)"
+        ],
+        "cultural_practices": [
+            "Use certified pathogen-free hot-water treated tomato seeds",
+            "Sterilize pruning shears with 70% isopropyl alcohol between rows",
+            "Eliminate solanaceous weeds (nightshade) around the greenhouse/field",
+            "Never work or prune in tomato fields while leaves are wet"
+        ]
+    }
+}

@@ -1,0 +1,60 @@
+{
+    "image_filename": "potato_late_blight.jpg",
+    "severity_analysis": {
+        "total_leaf_pixels": 78092,
+        "diseased_pixels": 42686,
+        "healthy_pixels": 35406,
+        "severity_percentage": 54.66,
+        "grade": "Grade 4",
+        "stage": "Critical / Destructive",
+        "urgency": "Crop Destruction Risk - Quarantine Plant",
+        "color_code": [
+            142,
+            68,
+            173
+        ]
+    },
+    "classification": {
+        "predicted_class": "Tomato___Late_blight",
+        "formatted_name": "Tomato - Late blight",
+        "confidence": 83.64,
+        "top_predictions": [
+            {
+                "class_name": "Tomato___Late_blight",
+                "formatted_name": "Tomato - Late blight",
+                "confidence": 83.64
+            },
+            {
+                "class_name": "Tomato___healthy",
+                "formatted_name": "Tomato - healthy",
+                "confidence": 1.82
+            },
+            {
+                "class_name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+                "formatted_name": "Tomato - Tomato Yellow Leaf Curl Virus",
+                "confidence": 1.82
+            }
+        ]
+    },
+    "agronomic_advisory": {
+        "crop": "Tomato",
+        "disease_name": "Late Blight",
+        "pathogen": "Phytophthora infestans (Oomycete)",
+        "symptoms": "Large, irregularly shaped greasy dark greenish-brown lesions on leaves and stems; rapid wilting and collapse during cool, damp weather.",
+        "action_plan": "Severe defoliation alert: Apply systemic Cymoxanil or Dimethomorph every 5-7 days under active blight conditions.",
+        "organic_remedies": [
+            "Bordeaux mixture (1%) preventive spray",
+            "Copper sulfate pentahydrate bio-approved formulations"
+        ],
+        "chemical_remedies": [
+            "Mandipropamid 23.4% SC (Revus) @ 0.8 ml/L",
+            "Metalaxyl-M 4% + Mancozeb 64% WP @ 2.5 g/L",
+            "Famoxadone + Cymoxanil (Equation Pro) @ 1.0 g/L"
+        ],
+        "cultural_practices": [
+            "Select resistant cultivars (e.g., Defiant, Mountain Merit, Plum Regal)",
+            "Provide maximum plant-to-plant ventilation in high tunnels",
+            "Avoid planting downwind from potato fields"
+        ]
+    }
+}

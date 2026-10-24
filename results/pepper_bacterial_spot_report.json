@@ -1,0 +1,62 @@
+{
+    "image_filename": "pepper_bacterial_spot.jpg",
+    "severity_analysis": {
+        "total_leaf_pixels": 71106,
+        "diseased_pixels": 12792,
+        "healthy_pixels": 58314,
+        "severity_percentage": 17.99,
+        "grade": "Grade 2",
+        "stage": "Moderate Infection",
+        "urgency": "Immediate Treatment Required",
+        "color_code": [
+            230,
+            126,
+            34
+        ]
+    },
+    "classification": {
+        "predicted_class": "Potato___Early_blight",
+        "formatted_name": "Potato - Early blight",
+        "confidence": 83.49,
+        "top_predictions": [
+            {
+                "class_name": "Potato___Early_blight",
+                "formatted_name": "Potato - Early blight",
+                "confidence": 83.49
+            },
+            {
+                "class_name": "Tomato___healthy",
+                "formatted_name": "Tomato - healthy",
+                "confidence": 1.83
+            },
+            {
+                "class_name": "Tomato___Tomato_Yellow_Leaf_Curl_Virus",
+                "formatted_name": "Tomato - Tomato Yellow Leaf Curl Virus",
+                "confidence": 1.83
+            }
+        ]
+    },
+    "agronomic_advisory": {
+        "crop": "Potato",
+        "disease_name": "Early Blight",
+        "pathogen": "Alternaria solani (Fungus)",
+        "symptoms": "Concentric rings ('target-board' or 'bullseye' pattern) with chlorotic yellow halo on older foliage, turning dark brown and necrotic.",
+        "action_plan": "Apply protective and curative bio-fungicide (Bacillus subtilis) or Copper Oxychloride spray every 7-10 days.",
+        "organic_remedies": [
+            "Cold-pressed Neem Oil spray (5ml/L of water with mild soap emulsifier)",
+            "Bacillus subtilis biological formulation",
+            "Copper hydroxide / Bordeaux mixture (1%)"
+        ],
+        "chemical_remedies": [
+            "Mancozeb 75% WP @ 2.0 - 2.5 g/L water",
+            "Chlorothalonil 75% WP @ 2.0 g/L water",
+            "Azoxystrobin 23% SC @ 1.0 ml/L water"
+        ],
+        "cultural_practices": [
+            "Practice 3-year crop rotation with non-solanaceous crops",
+            "Use drip irrigation rather than overhead sprinklers",
+            "Maintain optimal plant spacing (30-40 cm) for air circulation",
+            "Ensure balanced nitrogen fertilization (excess N promotes vulnerability)"
+        ]
+    }
+}
