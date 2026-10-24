@@ -91,6 +91,14 @@ def get_classifier():
     return PlantDiseaseClassifier()
 
 
+def colorize_channel(channel_2d: np.ndarray, colormap_name: str = "viridis") -> np.ndarray:
+    """Normalizes a 2D single-channel matrix and applies a Matplotlib colormap returning RGB uint8 array."""
+    norm = cv2.normalize(channel_2d.astype(np.float32), None, 0.0, 1.0, cv2.NORM_MINMAX)
+    cmap = plt.get_cmap(colormap_name)
+    colored = (cmap(norm)[:, :, :3] * 255).astype(np.uint8)
+    return colored
+
+
 def main():
     # Header Banner
     st.markdown('<div class="main-header">🌿 Automated Plant Leaf Disease Detection & Severity Estimation</div>', unsafe_allow_html=True)
@@ -287,6 +295,7 @@ def main():
         report_img_path = os.path.join("results", f"{os.path.splitext(image_name)[0]}_report.png")
         os.makedirs("results", exist_ok=True)
         fig.savefig(report_img_path, bbox_inches="tight", dpi=200)
+        plt.close(fig)
 
         with open(report_img_path, "rb") as file:
             st.download_button(
@@ -311,13 +320,13 @@ def main():
 
         col_c1, col_c2, col_c3 = st.columns(3)
         with col_c1:
-            st.image(hsv_img[:, :, 0], caption="HSV: Hue Channel (Color Identity)", cmap="hsv", use_container_width=True)
+            st.image(colorize_channel(hsv_img[:, :, 0], "hsv"), caption="HSV: Hue Channel (Color Identity)", use_container_width=True)
             st.caption("Hue isolates chlorophyll (green: ~40-80) from necrotic browning (~10-25).")
         with col_c2:
-            st.image(hsv_img[:, :, 1], caption="HSV: Saturation Channel (Purity)", cmap="viridis", use_container_width=True)
+            st.image(colorize_channel(hsv_img[:, :, 1], "viridis"), caption="HSV: Saturation Channel (Purity)", use_container_width=True)
             st.caption("High saturation highlights vibrant leaf area; background is near zero.")
         with col_c3:
-            st.image(lab_img[:, :, 1], caption="LAB: a* Channel (Green to Red)", cmap="coolwarm", use_container_width=True)
+            st.image(colorize_channel(lab_img[:, :, 1], "coolwarm"), caption="LAB: a* Channel (Green to Red)", use_container_width=True)
             st.caption("Negative values = healthy green; positive values = diseased brown/red lesions.")
 
         st.markdown("---")
@@ -341,6 +350,7 @@ def main():
         ax_hist[1].set_title(f"CLAHE Enhanced Histogram (Tiles: 8x8)")
         ax_hist[1].set_xlim([0, 256])
         st.pyplot(fig_hist)
+        plt.close(fig_hist)
 
         st.markdown("---")
 
@@ -351,10 +361,10 @@ def main():
 
         col_e1, col_e2 = st.columns(2)
         with col_e1:
-            st.image(sobel_res["magnitude"], caption="Sobel Gradient Magnitude sqrt(Gx^2 + Gy^2)", cmap="gray", use_container_width=True)
+            st.image(sobel_res["magnitude"], caption="Sobel Gradient Magnitude sqrt(Gx^2 + Gy^2)", use_container_width=True)
             st.caption("First-order spatial derivatives highlighting leaf boundary and lesion contours.")
         with col_e2:
-            st.image(canny_edges, caption="Canny Multi-Stage Hysteresis Edges", cmap="gray", use_container_width=True)
+            st.image(canny_edges, caption="Canny Multi-Stage Hysteresis Edges", use_container_width=True)
             st.caption("Non-maximum suppression and hysteresis thresholding (50, 150).")
 
     # --------------------------------------------------------------------------
